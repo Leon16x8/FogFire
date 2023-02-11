@@ -1,17 +1,18 @@
 <?php
-     namespace FogFireStore\FogFire\PHP\DAO;
+namespace FogFireStore\FogFire\PHP\DAO;
 
-    class Conexao{
-        public function conectar(){
-            try{
-                $conn = mysqli_connect('localhost','root','','FogFire');
-                if($conn){
-                    echo "\nConectado com sucesso!";
-                    return $conn;
-                }
-            }catch(Except $erro){
-                echo $erro;
+class Conexao
+{
+    public function conectar()
+    {
+        try {
+            $conn = mysqli_connect('localhost', 'root', '', 'FogFire');
+            if ($conn) {
+                return $conn;
             }
-        }//fim do metodo conectar
-    }//fim da classe
+        } catch (Except $erro) {
+            echo $erro;
+        }
+    } //fim do metodo conectar
+} //fim da classe
 ?>

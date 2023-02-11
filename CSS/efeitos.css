@@ -1,0 +1,62 @@
+body {
+    background-color: black;
+    font-family: 'Irish Grover', cursive;
+    color: white;
+}
+
+#fotoFundos {
+    background-image: url("../Fotos/FundoIncial.png");
+    height: 100%;
+    background-repeat: no-repeat;
+    margin: 0 11%;
+}
+
+.titulo {
+    text-align: center;
+}
+
+.forms {
+    margin: 5% 25%;
+    text-align: center;
+}
+
+
+.input {
+    background-color: white;
+    border-radius: 25px;
+    text-align: center;
+    width: 8cm;
+}
+
+button {
+    background-color: hotpink;
+    border: 2px solid hotpink;
+    border-radius: 25px;
+    color: white;
+    height: 1.2cm;
+}
+
+#something {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    justify-items: center;
+    column-count: 6;
+    text-align: center;
+    border: 5px solid rgb(136, 231, 136);
+}
+
+
+
+#Estoque {
+    margin-right: 80px;
+    text-align: center;
+}
+
+.container {
+    margin: 5% 37%;
+    text-align: center;
+}
