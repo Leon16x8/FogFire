@@ -1,7 +1,7 @@
 <?php
 namespace FogFireStore\FogFire\PHP\DAO;
 
-require_once("DAO/Conexao.php");
+require_once("Conexao.php");
 
 use FogFireStore\FogFire\PHP\DAO\Conexao;
 

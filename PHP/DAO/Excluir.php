@@ -1,29 +1,31 @@
 <?php
-namespace FogFireStore\FogFire\PHP\DAO;
+    namespace FogFireStore\FogFire\PHP\DAO;
 
-require_once("DAO/Conexao.php");
+    require_once("Conexao.php");
 
-use FogFireStore\FogFire\PHP\DAO\Conexao;
+    use FogFireStore\FogFire\PHP\DAO\Conexao;
 
-class Excluir
-{
-    public function excluir(Conexao $conexao, string $nomeDaTabela, int $codigo)
+    class Excluir
     {
-        try {
-            $conn = $conexao->Conectar();
-            $sql = "delete from $nomeDaTabela where codigo = '$codigo'";
-            $result = mysqli_query($conn, $sql);
+        public function excluir(Conexao $conexao, string $nomeDaTabela, int $codigo)
+        {
+            try {
+                $conn = $conexao->Conectar();
+                $sql = "delete from $nomeDaTabela where codigo = '$codigo'";
+                $result = mysqli_query($conn, $sql);
 
-            mysqli_close($conn);
+                mysqli_close($conn);
 
-            if ($result) {
-                return;
+                if ($result) {
+                    echo "Excluído com sucesso!";
+                    return;
+                }
+                echo "Deu erro!";
+
+            } catch (Except $erro) {
+                echo $erro;
             }
-
-        } catch (Except $erro) {
-            echo $erro;
-        }
-    }
-}
+        }//Fim do método para excluir
+    }//Fim da classe excluir
 
 ?>

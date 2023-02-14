@@ -1,6 +1,6 @@
 body {
     background-color: black;
-    font-family: 'Irish Grover', cursive;
+    /*font-family: 'Irish Grover', cursive;*/
     color: white;
 }
 
@@ -46,17 +46,33 @@ button {
     justify-items: center;
     column-count: 6;
     text-align: center;
-    border: 5px solid rgb(136, 231, 136);
+    width: 20cm;
+}
+
+.caixaEstoque{
+    margin: 5% auto;
+    border: 8px groove green;
+    margin-top: 25%;
 }
 
 
+#Estoque{
+    margin-left: 45%;
+    margin-top: 2%;
+}
 
-#Estoque {
-    margin-right: 80px;
+.lista{ /* VAI MECHER O QUE ESTA DENTRO DA LISTA */
+    column-count: 2;
     text-align: center;
+    margin: 2% auto;
+}
+
+.lista label{
+    border: 2px double hotpink;
+    width: 3cm;
 }
 
 .container {
-    margin: 5% 37%;
-    text-align: center;
+    margin: 0 20%;
+    
 }
