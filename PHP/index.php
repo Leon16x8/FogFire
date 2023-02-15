@@ -6,7 +6,6 @@
     require_once("DAO/Excluir.php");
     require_once("DAO/Consultar.php");
 
-
     use FogFireStore\FogFire\PHP\DAO\Conexao;
     use FogFireStore\FogFire\PHP\DAO\Inserir;
     use FogFireStore\FogFire\PHP\DAO\Consultar;
@@ -21,6 +20,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>FogFire Store</title>
+        <link rel="shortcut icon type" type="image/x-icon" href="../Fotos/icon.ico"/>
         <!--Estilos Bootstrap -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
             integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
@@ -52,16 +52,17 @@
                         required /><br><br>
 
                     <label>Preço: </label><br>
-                    <input id="inpuSmall" class="input" type="number" name="tPreco" placeholder="Valor do Produto"
+                    <input id="inpuSmall" class="input" type="number" step=".01" name="tPreco" placeholder="Valor do Produto"
                         required /><br><br>
 
-                    <button>Cadastrar Produto</button>
+                    <button type="submit" name="enviar" value="Cadastrar">Cadastrar Produto</button>
                     
                     <?php
-                    
-                    $conexao = new Conexao();
-                    $cad = new Inserir();
-                    echo $cad->cadastrar($conexao, "produtos", $_POST['tProduto'], $_POST['tQuantidade'], $_POST['tPreco']);
+                    if(isset($_POST['enviar'])){
+                        $conexao = new Conexao();
+                        $cad = new Inserir();
+                        echo $cad->cadastrar($conexao, "produtos", $_POST['tProduto'], $_POST['tQuantidade'], $_POST['tPreco']);
+                    }
                  
                     ?>
 
@@ -78,7 +79,7 @@
 
                                 <?php
                                 
-                                //$conexao = new Conexao();
+                                $conexao = new Conexao();
                                 $consul = new Consultar();
                                 echo $consul->consultarTudo($conexao, "produtos");
                                 
@@ -96,10 +97,10 @@
                     <label>Codigo do Produto: </label><br>
                     <input class="input" type="number" name="tCodigo" placeholder="Codigo do Produto" required /><br><br>
 
-                    <button>Excluir</button>
+                    <button type="submit" name="enviar1" value="excluir">Excluir</button>
 
                     <?php
-                    if($_POST['tCodigo'] > 0){
+                    if(isset($_POST['enviar1']) && $_POST['tCodigo'] > 0){
                         $conexao = new Conexao();
                         $exc = new Excluir();
                         echo $exc->excluir($conexao, "produtos",$_POST['tCodigo']);

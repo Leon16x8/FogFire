@@ -64,7 +64,7 @@
                                             <?php echo "Qnt: ".$estoqueProduto[$i]; ?>
                                         </label>
                                     </div>
-                                    <button>+</button>
+                                    <a href="carrinho.php?add=carrinho&id='.$codigoprod['$i'].'">Adicionar ao Carrinho</a>
                                 </div>
                                 <?php $i++;
 
