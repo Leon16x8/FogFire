@@ -11,7 +11,7 @@ class Inserir
     {
         try {
             $conn = $conexao->Conectar(); //Abrindo conexao com banco
-            $sql = "insert into $nomeDaTabela (codigo, nomeProduto, estoque, preco) values ('', '$nomeProduto', '$estoque', '$preco')"; //Escrevi o script
+            $sql = "insert into $nomeDaTabela (id, nomeProduto, estoque, preco) values ('', '$nomeProduto', '$estoque', '$preco')"; //Escrevi o script
             $result = mysqli_query($conn, $sql); //Executa a ação do script no banco
 
             mysqli_close($conn); //fechando a conexão com sucesso!

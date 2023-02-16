@@ -4,12 +4,13 @@
     require_once("DAO/Conexao.php");
     require_once("DAO/Inserir.php");
     require_once("DAO/Excluir.php");
-    require_once("DAO/Consultar.php");
 
     use FogFireStore\FogFire\PHP\DAO\Conexao;
     use FogFireStore\FogFire\PHP\DAO\Inserir;
-    use FogFireStore\FogFire\PHP\DAO\Consultar;
     use FogFireStore\FogFire\PHP\DAO\Excluir;
+
+    $conn = new Conexao;
+	$cadd = new Inserir;
 ?>
 
 <!DOCTYPE html>
@@ -17,7 +18,6 @@
 
     <head>
         <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>FogFire Store</title>
         <link rel="shortcut icon type" type="image/x-icon" href="../Fotos/icon.ico"/>
@@ -26,10 +26,7 @@
             integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
         <!-- Efeitos Personalizados -->
         <link rel="stylesheet" type="text/css" href="../CSS/efeitos.css" />
-        <!-- Tipografia -->
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Irish+Grover&display=swap" rel="stylesheet">
+
     </head>
 
     <header>
@@ -37,6 +34,7 @@
     </header>
 
     <body>
+
         <div id="fotoFundos">
             
             <form method="POST">
@@ -70,25 +68,46 @@
 
             </form>
 
-            <div class="caixaEstoque">
-                <h1 id="Estoque">Estoque</h1>
-                <main class="container">
-                    <div class="row">
-                        <div class="col-md-3">
-                            <form id="something">
+            <!-- CONSULTA -->
 
-                                <?php
-                                
-                                $conexao = new Conexao();
-                                $consul = new Consultar();
-                                echo $consul->consultarTudo($conexao, "produtos");
-                                
-                                ?>
-                            </form>
-                        </div>
+            <form method="GET">
+                <button type="submit" name="consultar" class="btn btn-dark">Consultar</button>
+                <div class="container"> 
+                    <div class="row">
+                        <?php
+                            if(isset($_GET['consultar'])){
+                                $sql= "SELECT * FROM PRODUTOS";
+                                if($res=mysqli_query($conn->conectar(), $sql)){
+                                    $nomeProduto = array();
+                                    $estoqueProduto = array();
+                                    $precoProduto = array();
+                                    $i = 0;
+                                    while($reg = mysqli_fetch_assoc($res)){
+                                        $id[$i] = $reg['id'];
+                                        $nomeProduto[$i] = $reg['nomeProduto'];
+                                        $estoqueProduto[$i] = $reg['estoque'];
+                                        $precoProduto[$i] = $reg['preco'];
+                                        ?>
+                                            
+                                            <div class="col-sm-2 itensCadastrados text-center">
+                                                <label><?php echo "<br>Descrição:   ".$nomeProduto[$i]."<br>ID:   ".$id[$i]."<br>Valor:   ".$precoProduto[$i]." R$<br>Quantidade:   ".$estoqueProduto[$i]; ?></label>
+                                                <br>
+                                                <div class="btn-group btn-group-sm" role="group" arial-label="Basic sample">
+                                                    <a href="DAO/Atualizar.php?Atualizar=<?php echo $id[$i];?>" class="btn btn-primary">Editar</a>
+                                                    <a href="#" class="btn btn-danger">Excluir</a>
+                                                    <a href="carrinho.php?acao=add&id=<?php echo $id[$i];?>" class="btn btn-secondary">Add Cart</a>
+                                                </div>
+                                            </div>
+                                                
+                                        <?php
+                                        $i++;
+                                    }
+                                }
+                            }
+                        ?>
                     </div>
-                </main>
-            </div>
+                </div>
+            </form>
 
             <form method="POST">
                 <div class="forms">

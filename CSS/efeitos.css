@@ -2,13 +2,10 @@ body {
     background-color: black;
     /*font-family: 'Irish Grover', cursive;*/
     color: white;
-}
-
-#fotoFundos {
     background-image: url("../Fotos/FundoIncial.png");
     height: 100%;
     background-repeat: no-repeat;
-    margin: 0 11%;
+    background-position: center;
 }
 
 .titulo {
@@ -16,7 +13,7 @@ body {
 }
 
 .forms {
-    margin: 5% 25%;
+
     text-align: center;
 }
 
@@ -36,43 +33,12 @@ button {
     height: 1.2cm;
 }
 
-#something {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    align-content: center;
-    justify-items: center;
-    column-count: 6;
-    text-align: center;
-    width: 20cm;
+/* Borda do Menu */
+.itensCadastrados{
+    border: 2px solid lightgray;
+    border-radius: 10px;
+}
+.itensCadastrados:hover{
+    background-color: aqua;
 }
 
-.caixaEstoque{
-    margin: 5% auto;
-    border: 8px groove green;
-    margin-top: 25%;
-}
-
-
-#Estoque{
-    margin-left: 45%;
-    margin-top: 2%;
-}
-
-.lista{ /* VAI MECHER O QUE ESTA DENTRO DA LISTA */
-    column-count: 2;
-    text-align: center;
-    margin: 2% auto;
-}
-
-.lista label{
-    border: 2px double hotpink;
-    width: 3cm;
-}
-
-.container {
-    margin: 0 20%;
-    
-}
