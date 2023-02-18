@@ -4,13 +4,14 @@ use FogFireStore\FogFire\PHP\DAO\Conexao;
 require_once('DAO/Conexao.php');
 
 session_start();
+//verifica se não existe a sessão responsavel por guardar valores
 if(!isset($_SESSION['carrinho'])){
     $_SESSION['carrinho'] = array();
 }
 
 // verifica a ação
 if(isset($_GET['acao'])){
-    // se é adiocionar produto
+    //Adiocionar produto
     if($_GET['acao'] == 'add'){
         $id = $_GET['id'];
         if(!isset($_SESSION['carrinho'] [$id])){
@@ -26,9 +27,25 @@ if(isset($_GET['acao'])){
         $id = $_GET['id'];
         if (isset($_SESSION['carrinho'][$id]))
         {
+            //limpa o produto do carrinho
             unset($_SESSION['carrinho'][$id]);
         }
     }
+    
+    //ATUALIZAR CARRINHO DE COMPRAS
+    if ($_GET['acao'] == 'up'){
+        if (is_array($_GET['prod'])){
+            foreach($_GET['prod'] as $id => $qtd){
+                $id = intval($id);
+                $qtd = intval($qtd);
+                if (!empty($qtd) || $qtd <> 0){
+                    $_SESSION['carrinho.php'][$id] = $qtd;
+                }else{
+                    unset($_SESSION['carrinho.php'][$id]);//limpa o conteudo
+                }
+            }
+        }
+    } 
 }
 ?>
 <head>
@@ -42,9 +59,7 @@ if(isset($_GET['acao'])){
     <h1 class="titulo">Carrinho de Compras</h1>
 
     <form action="?acao=up" method="post">
-        <p><input type="submit" class="btn btn-secondary" value="Atualizar"/></p>
         <a href="index.php" class="btn btn-secondary">Continuar comprando...</a>
-    </form>
 
 <?php
     if(count($_SESSION['carrinho'])==0 ){
@@ -61,6 +76,9 @@ if(isset($_GET['acao'])){
             </tr>";
             $conexao = new Conexao();
             $conn = $conexao->conectar();
+
+        $_SESSION['dados'] = array();
+
         // percorre o array
         foreach ($_SESSION['carrinho'] as $id => $qtd){
             $sql = "SELECT id,nomeProduto,estoque,preco
@@ -71,20 +89,30 @@ if(isset($_GET['acao'])){
             $nomeProduto = $linha[1];
             $precoProduto = number_format($linha[2],2,',',',');
             $subtotal = number_format($linha[2] * $qtd,2,',','.');
-       
+
             echo " 
             <tr>
                 <th width='40'>$id</th>
                 <th width='244'>$nomeProduto</th>
-                <th width='60'>$qtd</th>
+                <th width='60'><input type='text' size='3' name='prod['$id']' value='$qtd'</th>
                 <th width='89'>$precoProduto</th>
                 <th width='100'>$subtotal</th>
                 <th width='64'><a href='carrinho.php?acao=del&id=$id'>REMOVER</a></th>
             </tr>";
+
+            array_push($_SESSION['dados'],
+            array('$id' => $id,
+            'quantidade' => $qtd,
+            'preco' => $precoProduto,
+            'total' => $subtotal
+            )
+            );//ArrayPush
+        
         }
         echo '</table>';
         echo '<br><a href="finalizarcompra.php" class="btn btn-secondary">Finalizar Pedido</a>';
     }
 ?>
-
+    <p><input type="submit" value="Atualizar"/></p>
+    </form>
 </body>
