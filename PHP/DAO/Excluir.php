@@ -1,31 +1,24 @@
-<?php
+<?php 
     namespace FogFireStore\FogFire\PHP\DAO;
 
-    require_once("Conexao.php");
+    session_start();
+
+    require_once('Conexao.php');
 
     use FogFireStore\FogFire\PHP\DAO\Conexao;
+    
+    $conexao = new Conexao;
+    $conn = $conexao -> conectar();
 
-    class Excluir
-    {
-        public function excluir(Conexao $conexao, string $nomeDaTabela, int $codigo)
-        {
-            try {
-                $conn = $conexao->Conectar();
-                $sql = "delete from $nomeDaTabela where codigo = '$codigo'";
-                $result = mysqli_query($conn, $sql);
+    $id = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
+    $sql = "DELETE FROM PRODUTOS WHERE ID = $id";
+    $res = mysqli_query($conn, $sql);
 
-                mysqli_close($conn);
-
-                if ($result) {
-                    echo "Excluído com sucesso!";
-                    return;
-                }
-                echo "Deu erro!";
-
-            } catch (Except $erro) {
-                echo $erro;
-            }
-        }//Fim do método para excluir
-    }//Fim da classe excluir
-
+    if(mysqli_affected_rows($conn)){
+        $_SESSION['msg'] = "<p style='color:green;'> Usuario apagado com sucesso</p>";
+        header("Location:../Index.php");
+    }else{
+        $_SESSION['msg'] = "<p style='color:red;'> Erro ! Usuario nao deletado </p>";
+        header("Location:../Index.php");
+    } 
 ?>

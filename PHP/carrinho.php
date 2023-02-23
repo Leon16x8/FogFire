@@ -1,12 +1,13 @@
 <?php
-namespace FogFireStore\FogFire\PHP;
-use FogFireStore\FogFire\PHP\DAO\Conexao;
-require_once('DAO/Conexao.php');
 
-session_start();
-//verifica se não existe a sessão responsavel por guardar valores
-if(!isset($_SESSION['carrinho'])){
-    $_SESSION['carrinho'] = array();
+    namespace FogFireStore\FogFire\PHP;
+    use FogFireStore\FogFire\PHP\DAO\Conexao;
+    require_once('DAO/Conexao.php');
+
+    session_start();
+    //verifica se não existe a sessão responsavel por guardar valores
+    if(!isset($_SESSION['carrinho'])){
+        $_SESSION['carrinho'] = array();
 }
 
 // verifica a ação
@@ -34,8 +35,8 @@ if(isset($_GET['acao'])){
     
     //ATUALIZAR CARRINHO DE COMPRAS
     if ($_GET['acao'] == 'up'){
-        if (is_array($_GET['prod'])){
-            foreach($_GET['prod'] as $id => $qtd){
+        if (is_array($_POST['prod'])){
+            foreach($_POST['prod'] as $id => $qtd){
                 $id = intval($id);
                 $qtd = intval($qtd);
                 if (!empty($qtd) || $qtd <> 0){
@@ -115,4 +116,17 @@ if(isset($_GET['acao'])){
 ?>
     <p><input type="submit" value="Atualizar"/></p>
     </form>
+<?php
+    if ( count($_SESSION['carrinho.php'])<>0){
+        echo "<form action='' method='get'>
+            <p><input type='submit' name='finalizar' value='Finalizar Pedido'/></p>
+            </form>"
+    }
+
+    if (isset($_GET['finalizar'])){
+        $sqlvendas = 'INSERT INTO vendas'
+    }
+
+?>
+
 </body>

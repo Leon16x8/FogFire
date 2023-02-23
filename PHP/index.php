@@ -3,11 +3,10 @@
 
     require_once("DAO/Conexao.php");
     require_once("DAO/Inserir.php");
-    require_once("DAO/Excluir.php");
 
     use FogFireStore\FogFire\PHP\DAO\Conexao;
     use FogFireStore\FogFire\PHP\DAO\Inserir;
-    use FogFireStore\FogFire\PHP\DAO\Excluir;
+
 
     $conn = new Conexao;
 	$cadd = new Inserir;
@@ -78,6 +77,7 @@
                             if(isset($_GET['consultar'])){
                                 $sql= "SELECT * FROM PRODUTOS";
                                 if($res=mysqli_query($conn->conectar(), $sql)){
+                                    $id = array();
                                     $nomeProduto = array();
                                     $estoqueProduto = array();
                                     $precoProduto = array();
@@ -93,8 +93,8 @@
                                                 <label><?php echo "<br>Descrição:   ".$nomeProduto[$i]."<br>ID:   ".$id[$i]."<br>Valor:   ".$precoProduto[$i]." R$<br>Quantidade:   ".$estoqueProduto[$i]; ?></label>
                                                 <br>
                                                 <div class="btn-group btn-group-sm" role="group" arial-label="Basic sample">
-                                                    <a href="DAO/Atualizar.php?Atualizar=<?php echo $id[$i];?>" class="btn btn-primary">Editar</a>
-                                                    <a href="#" class="btn btn-danger">Excluir</a>
+                                                    <a href="Atualizar.php?id=<?php echo $id[$i];?>" class="btn btn-primary">Editar</a>
+                                                    <a href="DAO/Excluir.php?id=<?php echo $id[$i];?>" class="btn btn-danger">Excluir</a>
                                                     <a href="carrinho.php?acao=add&id=<?php echo $id[$i];?>" class="btn btn-secondary">Add Cart</a>
                                                 </div>
                                             </div>
@@ -108,27 +108,6 @@
                     </div>
                 </div>
             </form>
-
-            <form method="POST">
-                <div class="forms">
-                    <h1 class="titulo">Excluir Produtos</h1>
-
-                    <label>Codigo do Produto: </label><br>
-                    <input class="input" type="number" name="tCodigo" placeholder="Codigo do Produto" required /><br><br>
-
-                    <button type="submit" name="enviar1" value="excluir">Excluir</button>
-
-                    <?php
-                    if(isset($_POST['enviar1']) && $_POST['tCodigo'] > 0){
-                        $conexao = new Conexao();
-                        $exc = new Excluir();
-                        echo $exc->excluir($conexao, "produtos",$_POST['tCodigo']);
-                    }
-                    ?>
-                </div>
-            </form>
-
-            
         </div><!--Fim da div para foto fundos-->
     </body>
 
