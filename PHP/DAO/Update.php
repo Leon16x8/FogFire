@@ -12,7 +12,7 @@
 
     $id = filter_input(INPUT_POST, 'tId', FILTER_SANITIZE_NUMBER_INT);
     $nomeProduto = filter_input(INPUT_POST, 'tNomeProduto', FILTER_SANITIZE_STRING);
-    $preco = filter_input(INPUT_POST, 'tPreco', FILTER_SANITIZE_NUMBER_INT);
+    $preco = filter_input(INPUT_POST, 'tPreco', FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
     $estoque = filter_input(INPUT_POST, 'tEstoque', FILTER_SANITIZE_NUMBER_INT);
 
     $sql  = "UPDATE PRODUTOS SET NOMEPRODUTO='$nomeProduto', PRECO='$preco', ESTOQUE ='$estoque' WHERE ID ='$id'";

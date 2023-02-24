@@ -26,6 +26,9 @@
         <!-- Efeitos Personalizados -->
         <link rel="stylesheet" type="text/css" href="../CSS/efeitos.css" />
 
+        <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-maskmoney/3.0.2/jquery.maskMoney.min.js" integrity="sha512-Rdk63VC+1UYzGSgd3u2iadi0joUrcwX0IWp2rTh6KXFoAmgOjRS99Vynz1lJPT8dLjvo6JZOqpAHJyfCEZ5KoA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
     </head>
 
     <header>
@@ -48,7 +51,7 @@
                         required /><br><br>
 
                     <label>Preço: </label><br>
-                    <input id="inpuSmall" class="input" type="number" step=".01" name="tPreco" placeholder="Valor do Produto"
+                    <input id="currency" class="input" type="text" name="tPreco" placeholder="Valor do Produto"
                         required /><br><br>
 
                     <button class="btnCris" type="submit" name="enviar" value="Cadastrar">Cadastrar Produto</button>
@@ -92,7 +95,7 @@
                                                     <br>
                                                     <div>
                                                         <div class="btn-group btn-group-sm" role="group" arial-label="Basic sample">
-                                                            <a href="Update.php?id=<?php echo $id[$i];?>" class="btn btn-primary"><img src='../Fotos/lapis.png' style='width:44px;height:36px;'>Editar</a>
+                                                            <a href="Atualizar.php?id=<?php echo $id[$i];?>" class="btn btn-primary"><img src='../Fotos/lapis.png' style='width:44px;height:36px;'>Editar</a>
                                                             <a href="#" class="btn btn-danger"><img src='../Fotos/excluir.png' style='width:44px;height:36px;'>Excluir</a>
                                                             <!--<buton>--><a  href="carrinho.php?acao=add&id=<?php echo $id[$i];?>" class="btn btn-secondary"><img src='../Fotos/carrinho.png' style='width:44px;height:36px;'><span id="tCard">Add Cart</span></a><!--</buton>-->
                                                         </div>
@@ -110,4 +113,5 @@
             </div> <!--Fim do Botão Consultar--> 
         </div><!--Fim da div para foto fundos-->
     </body>
+    <script>$(function() {$('#currency').maskMoney();})</script>
 </html>
