@@ -66,42 +66,42 @@ if(isset($_GET['acao'])){
     </head>
     <body>
         <h1 class="titulo">Carrinho de Compras</h1>
-        <div class="carrinho">
+        <div>
             <form action="?acao=up" method="post">
                 <p><br><input id="refresh" class="btn btn-secondary" type="submit" value="Atualizar"/></p>
                 <a href="index.php" class="btn btn-secondary" id="keepBuy">Continuar comprando...</a>
                 
-                <div id="carrinhoBox">
+                <div>
                     <?php
                         if(count($_SESSION['carrinho'])==0 ){
                             echo 'Não há produto no carrinho';
                         }else{
-                            echo "<table border='2' width='50%'>
-                            <thead>
-                                <tr>
+                            echo "<table class='table table-striped table-dark'>
+                                 <thead>
+                                    <tr>
                                     <th class='tzen' width='40'>ID</th>
                                     <th class='thed' width='244'>Produto</th>
                                     <th class='tzen' width='60'>Qtd</th>
                                     <th width='89'>Preço</th>
                                     <th width='100'>Subtotal</th>
                                     <th width='64'>Remover</th>
-                                </tr>
-                            </thead>";
+                                    </tr>
+                                </thead>";
                                 $conexao = new Conexao();
                                 $conn = $conexao->conectar();
 
-                            $_SESSION['dados'] = array();
+                                $_SESSION['dados'] = array();
 
-                            // percorre o array
-                            foreach ($_SESSION['carrinho'] as $id => $qtd){
+                                // percorre o array
+                                foreach ($_SESSION['carrinho'] as $id => $qtd){
                                 $sql = "SELECT id,nomeProduto,estoque,preco
                                         FROM produtos WHERE ID = '$id'";
                                 $resultado = mysqli_query($conn,$sql) or die (mysqli_error());
                                 $linha = mysqli_fetch_array($resultado);
 
                                 $nomeProduto = $linha[1];
-                                $precoProduto = number_format($linha[2],2,',',',');
-                                $subtotal = number_format($linha[2] * $qtd,2,',','.');
+                                $precoProduto = number_format($linha[3],2,',',',');
+                                $subtotal = number_format($linha[3] * $qtd,2,',','.');
 
                                 echo " 
                                 <tbody>
@@ -114,15 +114,7 @@ if(isset($_GET['acao'])){
                                         <td class='btnRemove' width='64'><a href='carrinho.php?acao=del&id=$id'>REMOVER</a></th>
                                     </tr>
                                 </tbody";
-
-                                array_push($_SESSION['dados'],
-                                array('$id' => $id,
-                                'quantidade' => $qtd,
-                                'preco' => $precoProduto,
-                                'total' => $subtotal
-                                )
-                                );//ArrayPush
-                            
+                  
                             }
                             echo '</table>';
                         }
@@ -136,7 +128,7 @@ if(isset($_GET['acao'])){
                 echo "<form action='?finalizar=up' method='get'>
                     <p><input class='btn btn-secondary' id='btnFimPedi' type='submit' name='finalizar' value='Finalizar Pedido'/></p>
                     </form>";
-            }
+            }   
 
             if (isset($_GET['finalizar'])){
                 $sqlvendas = 'INSERT INTO vendas (DATAHORA, TOTAL) values (CURRENT_TIMESTAMP, 0)';
@@ -153,12 +145,15 @@ if(isset($_GET['acao'])){
                 //percorrer a array
                 foreach ($_SESSION['carrinho'] as $id => $qtd){
                     //Pegando preço do produto
-                    $sql = "select id,nomeProduto,preco from produtos where id = '$id'";
+                    $sql = "select id,nomeProduto, estoque, preco from produtos where id = '$id'";
                     $res = mysqli_query($conn, $sql) or die (mysqli_error());
                     $registro = mysqli_fetch_array($res);
-                    $valor = $registro[2]*$qtd;
-                    $inspeditem = "INSERT INTO vendasitens (produto, qtd, valor, pedido) values ($id, $qtd, $valor, $ultpedido)";
+                    $nomeProduto = $registro[1];
+                    $valor = $registro[3]*$qtd;
+                    $inspeditem = "INSERT INTO VENDASITENS (id, produto, qtd, valor, pedido) VALUES ($id, '$nomeProduto', $qtd, $valor, $ultpedido)"; 
                     mysqli_query($conn,$inspeditem) or die (mysqli_error());
+                    $updatedeposit = "UPDATE PRODUTOS SET ESTOQUE = ESTOQUE - $qtd WHERE id = '$id'";
+                    mysqli_query($conn, $updatedeposit);
                 }
                 echo "<br/><br/>Pedido finalizado com sucesso !</form>";
 

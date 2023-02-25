@@ -1,9 +1,7 @@
 body {
     background-color: black;
-    /*font-family: 'Irish Grover', cursive;*/
     color: white;
     background-image: url("../Fotos/FundoIncial.png");
-    height: 100%;
     background-repeat: no-repeat;
     background-position: center;
 }
