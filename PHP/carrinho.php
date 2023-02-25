@@ -64,11 +64,23 @@ if(isset($_GET['acao'])){
         <!-- Efeitos Personalizados -->
         <link rel="stylesheet" type="text/css" href="../CSS/efeitos.css" />
     </head>
+
+    <header>
+    <section class="site">
+        <h1>Fog Fire</h1>
+        <nav>
+            <a href="Index.php">Home</a>
+            <a href="AdicionarProduto.php">Adicionar Produtos</a>
+            <a href="transacoes.php">Transações</a>
+            <a href="carrinho.php">Carrinho</a>
+        </nav>
+    </section>
+    </header>
+
     <body>
-        <h1 class="titulo">Carrinho de Compras</h1>
+        <h1 class="titulo">Carrinho</h1>
         <div>
             <form action="?acao=up" method="post">
-                <p><br><input id="refresh" class="btn btn-secondary" type="submit" value="Atualizar"/></p>
                 <a href="index.php" class="btn btn-secondary" id="keepBuy">Continuar comprando...</a>
                 
                 <div>
@@ -126,7 +138,7 @@ if(isset($_GET['acao'])){
         <?php
             if (count($_SESSION['carrinho'])<>0){
                 echo "<form action='?finalizar=up' method='get'>
-                    <p><input class='btn btn-secondary' id='btnFimPedi' type='submit' name='finalizar' value='Finalizar Pedido'/></p>
+                    <p><br><input class='btn btn-secondary' id='btnFimPedi' type='submit' name='finalizar' value='Finalizar Pedido'/></p>
                     </form>";
             }   
 

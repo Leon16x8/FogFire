@@ -27,13 +27,26 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-        <link rel="stylesheet" type="text/css" href="../CSS/style.css"/>
+        <link rel="stylesheet" type="text/css" href="../CSS/efeitos.css"/>
         <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-maskmoney/3.0.2/jquery.maskMoney.min.js" integrity="sha512-Rdk63VC+1UYzGSgd3u2iadi0joUrcwX0IWp2rTh6KXFoAmgOjRS99Vynz1lJPT8dLjvo6JZOqpAHJyfCEZ5KoA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     </head>
 
+    <header>
+    <section class="site">
+        <h1>Fog Fire</h1>
+        <nav>
+            <a href="Index.php">Home</a>
+            <a href="AdicionarProduto.php">Adicionar Produtos</a>
+            <a href="transacoes.php">Transações</a>
+            <a href="carrinho.php">Carrinho</a>
+        </nav>
+    </section>
+</header>
+
+
     <body>
-        <a href="index.php">Menu Principal</a><br>
+
         <h1>Editar Dados</h1>
         <?php 
             if(isset($_SESSION['msg'])){

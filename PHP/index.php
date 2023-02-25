@@ -35,43 +35,20 @@ $cadd = new Inserir;
 </head>
 
 <header>
-
+    <section class="site">
+        <h1>Fog Fire</h1>
+        <nav>
+            <a href="Index.php">Home</a>
+            <a href="AdicionarProduto.php">Adicionar Produtos</a>
+            <a href="transacoes.php">Transações</a>
+            <a href="carrinho.php">Carrinho</a>
+        </nav>
+    </section>
 </header>
 
 <body>
-
-    <div id="fotoFundos">
-
-        <form method="POST">
-            <h1 class="titulo">Adicionar Produtos</h1>
-            <div class="forms">
-
-                <label>Produto: </label><br>
-                <input class="input" type="text" name="tProduto" placeholder="Nome do Produto" required /><br><br>
-
-                <label>Quantidade: </label><br>
-                <input class="input" type="number" name="tQuantidade" placeholder="Quantidade do Produto"
-                    required /><br><br>
-
-                <label>Preço: </label><br>
-                <input id="currency" class="input" type="text" name="tPreco" placeholder="Valor do Produto"
-                    required /><br><br>
-
-                <button class="btnCris" type="submit" name="enviar" value="Cadastrar">Cadastrar Produto</button>
-
-                <?php
-                if (isset($_POST['enviar'])) {
-                    $conexao = new Conexao();
-                    $cad = new Inserir();
-                    echo $cad->cadastrar($conexao, "produtos", $_POST['tProduto'], $_POST['tQuantidade'], $_POST['tPreco']);
-                }
-
-                ?>
-
-            </div>
-
-        </form>
-
+    <h1 class="titulo">Home</h1>
+    
         <!-- CONSULTA -->
 
         <div class="caixaBloco">
