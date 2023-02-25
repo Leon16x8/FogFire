@@ -75,7 +75,6 @@ $cadd = new Inserir;
                     $pedido[$i] = $reg['pedido'];
                     ?>
                     <div class='table table-striped table-dark'>
-
                             <?php echo " 
                                 <tbody>
                                     <tr>
@@ -86,7 +85,6 @@ $cadd = new Inserir;
                                         <td>$pedido[$i]</td>
                                     </tr>
                                 </tbody";?>
-
                         <br>
                     </div>
                     <?php
