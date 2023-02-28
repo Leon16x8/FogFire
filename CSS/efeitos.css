@@ -4,6 +4,7 @@ body {
     background-image: url("../Fotos/FundoIncial.jpg");
     background-repeat: no-repeat;
     background-position: center;
+    background-size: cover;
 }
 
 .titulo {
